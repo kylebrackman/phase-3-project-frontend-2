@@ -16,7 +16,7 @@ function NavBar() {
                 <Button variant="contained">Reviews!</Button>
             </NavLink>
             <NavLink to="/submissions">
-                <Button variant="contained">Submit a Review!</Button>
+                <Button variant="contained">Submit an Item!</Button>
             </NavLink>
         </Stack>
     )
