@@ -10,7 +10,7 @@ function NavBar() {
     return (
         <Stack direction="row" spacing={2} style={{ justifyContent: "center", paddingTop: 20 }}>
             <NavLink to="/home">
-                <Button variant="contained">GEAR HEADZ</Button>
+                <Button variant="contained" >GEAR HEADZ</Button>
             </NavLink>
             <NavLink to="/reviews">
                 <Button variant="contained">Reviews!</Button>

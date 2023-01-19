@@ -18,13 +18,16 @@ const [items, setItems] = useState([])
       })
   }, [])
   
-  console.log(items)
+  function handleDeleteItem (id) {
+    const updatedItems = items.filter( item => item.id !== id)
+    setItems(updatedItems)
+  }
 
   return (
     <div >
       <NavBar />
       <Routes>
-          <Route path="/reviews" element={<ReviewPage items={items}/>} />
+          <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItem={handleDeleteItem}/> } />
       </Routes>
     </div>
   );
