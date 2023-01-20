@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 
 import NavBar from "./NavBar"
 import ReviewPage from './ReviewPage';
+import Submissions from './Submissions'
 
 
 function App() {
@@ -24,10 +25,11 @@ const [items, setItems] = useState([])
   }
 
   return (
-    <div >
+    <div className='App'>
       <NavBar />
       <Routes>
           <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItem={handleDeleteItem}/> } />
+          <Route path="/submissions" element={<Submissions /> } />
       </Routes>
     </div>
   );

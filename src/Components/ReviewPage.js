@@ -13,6 +13,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { alignProperty } from "@mui/material/styles/cssUtils";
+import ReviewsIcon from '@mui/icons-material/Reviews';
 
 
 // import Stack from '@mui/material/Stack';
@@ -22,7 +23,7 @@ function ReviewPage({ items, handleDeleteItem }) {
 
     const handleOpenClose = () => {
         setOpen(!open);
-      };
+    };
 
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -51,12 +52,18 @@ function ReviewPage({ items, handleDeleteItem }) {
                             <DeleteIcon onClick={() => onDeleteItem(item.id)}></DeleteIcon> <br />
                             Product Name: {item.item_name} <br />
                             Product Type: {item.item_type} <br />
-                            {item.reviews.map(i => {
-                                return i.review
-                            })}
-                            <ListItemButton onClick={handleOpenClose}></ListItemButton>
-                            <ListItemText primary="Reviews" />
-                            {open ? <ExpandLess /> : <ExpandMore />}
+                            <ListItemButton onClick={handleOpenClose}>
+                                <ListItemIcon>
+                                    <ReviewsIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Reviews" />
+                                {open ? <ExpandLess /> : <ExpandMore />}
+                            </ListItemButton>
+                            <Collapse in={open} timeout="auto" unmountOnExit>
+                                {item.reviews.map(i => {
+                                    return i.review
+                                })}
+                            </Collapse>
                         </Item>
                     </Grid>
                 </Grid>
