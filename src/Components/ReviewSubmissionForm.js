@@ -9,15 +9,14 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 
 
-function ReviewSubmissionForm({ handleAddReview }) {
+function ReviewSubmissionForm({ handleAddReview, itemId }) {
     const [review, setReview] = useState("")
     const [itemRating, setItemRating] = useState(10)
     const [reviewerName, setReviewerName] = useState("")
 
+
     function onAddReview(e) {
         e.preventDefault();
-
-        const itemId = 1
 
         fetch("http://localhost:9292/reviews", {
             method: "POST",
@@ -28,7 +27,7 @@ function ReviewSubmissionForm({ handleAddReview }) {
                 review: review,
                 item_rating: itemRating,
                 reviewer_name: reviewerName,
-                item_id: itemId,
+                item_id: itemId
             })
         })
             .then((r) => r.json())

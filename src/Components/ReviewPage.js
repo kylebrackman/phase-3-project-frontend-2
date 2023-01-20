@@ -22,7 +22,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 // import Stack from '@mui/material/Stack';
 
-function ReviewPage({ items, handleDeleteItem, handleAddReview }) {
+function ReviewPage({ items, handleDeleteItem, handleAddReview, reviews }) {
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
 
@@ -88,7 +88,7 @@ function ReviewPage({ items, handleDeleteItem, handleAddReview }) {
                                 {subsOpen ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
                             <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-                                <ReviewSubmissionForm handleAddReview={handleAddReview}/>
+                                <ReviewSubmissionForm handleAddReview={handleAddReview} reviews={reviews} itemId={item.id}/>
                             </Collapse>
                         </Item>
                     </Grid>
