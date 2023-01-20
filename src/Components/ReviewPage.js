@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import ReviewSubmissionForm from "./ReviewSubmissionForm";
+
+// Mui Styles Below
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -14,8 +17,6 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { alignProperty } from "@mui/material/styles/cssUtils";
 import ReviewsIcon from '@mui/icons-material/Reviews';
-import TextField from '@mui/material/TextField';
-
 
 
 // import Stack from '@mui/material/Stack';
@@ -72,7 +73,10 @@ function ReviewPage({ items, handleDeleteItem }) {
                                     return (
                                         <p>
                                             {i.reviewer_name}: {i.review}
+                                            <br />
+                                            Rating: {i.item_rating}
                                         </p> 
+            
                                     )
                                 })}
                             </Collapse>
@@ -84,7 +88,7 @@ function ReviewPage({ items, handleDeleteItem }) {
                                 {subsOpen ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
                             <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-                                <TextField></TextField>
+                                <ReviewSubmissionForm />
                             </Collapse>
                         </Item>
                     </Grid>

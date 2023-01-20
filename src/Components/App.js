@@ -10,6 +10,7 @@ import Submissions from './Submissions'
 
 function App() {
 const [items, setItems] = useState([])
+// const [reviews, setReviews] = useState([])
 
   useEffect(() => {
     fetch("http://localhost:9292/items")
@@ -18,11 +19,13 @@ const [items, setItems] = useState([])
         setItems(data)
       })
   }, [])
+
   
   function handleDeleteItem (id) {
     const updatedItems = items.filter( item => item.id !== id)
     setItems(updatedItems)
   }
+
 
   return (
     <div className='App'>
