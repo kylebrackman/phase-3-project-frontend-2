@@ -7,23 +7,24 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
-import List from '@mui/material/List';
-import ListSubheader from '@mui/material/ListSubheader';
+//import List from '@mui/material/List';
+//import ListSubheader from '@mui/material/ListSubheader';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { alignProperty } from "@mui/material/styles/cssUtils";
+//import { alignProperty } from "@mui/material/styles/cssUtils";
 import ReviewsIcon from '@mui/icons-material/Reviews';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 
 // import Stack from '@mui/material/Stack';
 
-function ReviewPage({ items, handleDeleteItem }) {
-    const [revOpen, setRevOpen] = useState(true)
-    const [subsOpen, setSubsOpen] = useState(true)
+function ReviewPage({ items, handleDeleteItem, handleAddReview }) {
+    const [revOpen, setRevOpen] = useState(false)
+    const [subsOpen, setSubsOpen] = useState(false)
 
 
     const handleReviewOpenClose = () => {
@@ -71,24 +72,23 @@ function ReviewPage({ items, handleDeleteItem }) {
                             <Collapse in={revOpen} timeout="auto" unmountOnExit>
                                 {item.reviews.map(i => {
                                     return (
-                                        <p>
+                                        <p key={i.id}>
                                             {i.reviewer_name}: {i.review}
                                             <br />
                                             Rating: {i.item_rating}
-                                        </p> 
-            
+                                        </p>
                                     )
                                 })}
                             </Collapse>
                             <ListItemButton onClick={handleRevSubOpenClose}>
-                                <ListItemIcon>
+                                <BorderColorIcon sx={{ paddingRight: 4 }}>
                                     <ReviewsIcon />
-                                </ListItemIcon>
+                                </BorderColorIcon>
                                 <ListItemText primary="Submit a New Review!" />
                                 {subsOpen ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
                             <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-                                <ReviewSubmissionForm />
+                                <ReviewSubmissionForm handleAddReview={handleAddReview}/>
                             </Collapse>
                         </Item>
                     </Grid>
