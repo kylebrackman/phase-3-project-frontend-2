@@ -14,15 +14,23 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { alignProperty } from "@mui/material/styles/cssUtils";
 import ReviewsIcon from '@mui/icons-material/Reviews';
+import TextField from '@mui/material/TextField';
+
 
 
 // import Stack from '@mui/material/Stack';
 
 function ReviewPage({ items, handleDeleteItem }) {
-    const [open, setOpen] = useState(true)
+    const [revOpen, setRevOpen] = useState(true)
+    const [subsOpen, setSubsOpen] = useState(true)
 
-    const handleOpenClose = () => {
-        setOpen(!open);
+
+    const handleReviewOpenClose = () => {
+        setRevOpen(!revOpen);
+    };
+
+    const handleRevSubOpenClose = () => {
+        setSubsOpen(!subsOpen);
     };
 
 
@@ -52,17 +60,31 @@ function ReviewPage({ items, handleDeleteItem }) {
                             <DeleteIcon onClick={() => onDeleteItem(item.id)}></DeleteIcon> <br />
                             Product Name: {item.item_name} <br />
                             Product Type: {item.item_type} <br />
-                            <ListItemButton onClick={handleOpenClose}>
+                            <ListItemButton onClick={handleReviewOpenClose}>
                                 <ListItemIcon>
                                     <ReviewsIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Reviews" />
-                                {open ? <ExpandLess /> : <ExpandMore />}
+                                {revOpen ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
-                            <Collapse in={open} timeout="auto" unmountOnExit>
+                            <Collapse in={revOpen} timeout="auto" unmountOnExit>
                                 {item.reviews.map(i => {
-                                    return i.review
+                                    return (
+                                        <p>
+                                            {i.reviewer_name}: {i.review}
+                                        </p> 
+                                    )
                                 })}
+                            </Collapse>
+                            <ListItemButton onClick={handleRevSubOpenClose}>
+                                <ListItemIcon>
+                                    <ReviewsIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Submit a New Review!" />
+                                {subsOpen ? <ExpandLess /> : <ExpandMore />}
+                            </ListItemButton>
+                            <Collapse in={subsOpen} timeout="auto" unmountOnExit>
+                                <TextField></TextField>
                             </Collapse>
                         </Item>
                     </Grid>
