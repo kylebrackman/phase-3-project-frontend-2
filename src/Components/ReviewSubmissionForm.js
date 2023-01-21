@@ -15,7 +15,7 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
     const [reviewerName, setReviewerName] = useState("")
 
 
-    function onAddReview(e) {
+    const onAddReview = (e) => {
         e.preventDefault();
 
         fetch("http://localhost:9292/reviews", {
@@ -34,8 +34,9 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
             .then((newReview) => {
                 handleAddReview(newReview)
                 setReview("")
-                setItemRating("Rating")
+                setItemRating(10)
                 setReviewerName("")
+                console.log(newReview)
             })
     }
 
@@ -55,12 +56,7 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
                 <TextField onChange={(e) => setReview(e.target.value)}></TextField>
                 <br />
                 <p>Rating 1-10</p>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={itemRating}
-                    label="Age"
-                    onChange={handleChange}
+                <Select labelId="demo-simple-select-label" id="demo-simple-select" value={itemRating} label="Age" onChange={handleChange}
                 >
                     <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>3</MenuItem>
