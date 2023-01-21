@@ -30,17 +30,12 @@ function App() {
   }, [])
 
 
-  function handleDeleteItem(id) {
-    const updatedItems = items.filter(item => item.id !== id)
-    setItems(updatedItems)
-  }
-
 
   return (
     <div className='App'>
       <NavBar />
       <Routes>
-        <Route path="/reviews" element={<ReviewPage itemsInput={items} handleDeleteItem={handleDeleteItem} reviews={reviews} />} />
+        <Route path="/reviews" element={<ReviewPage itemsInput={items} reviews={reviews} />} />
         <Route path="/submissions" element={<Submissions />} />
       </Routes>
     </div>
