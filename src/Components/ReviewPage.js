@@ -24,9 +24,9 @@ function ReviewPage({ itemsInput, reviews }) {
                 key={item.id}
                 itemId={item.id}
                 handleDeleteItem={handleDeleteItem}
-                reviews={reviews}
+                review={reviews.review}
                 itemName={item.item_name}
-                itemType={item}
+                itemType={item.item_type}
             />
         )
     })

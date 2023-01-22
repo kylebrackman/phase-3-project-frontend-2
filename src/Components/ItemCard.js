@@ -20,7 +20,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 
 
-function ItemCard({ itemId, handleDeleteItem, reviews, itemName, itemType }) {
+function ItemCard({ itemId, handleDeleteItem, reviews, review, itemName, itemType }) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
@@ -58,9 +58,11 @@ function ItemCard({ itemId, handleDeleteItem, reviews, itemName, itemType }) {
     return (
         <Item >
             <DeleteIcon onClick={() => onDeleteItem(itemId)}></DeleteIcon>
+            <p>Product Name: {itemName}</p>
+            <p>Product Type: {itemType}</p>
+             <br />
+
             <br />
-            Product Name:  <br />
-            Product Type:  <br />
             <ListItemButton onClick={handleReviewOpenClose}>
                 <ListItemIcon>
                     <ReviewsIcon />
@@ -69,14 +71,16 @@ function ItemCard({ itemId, handleDeleteItem, reviews, itemName, itemType }) {
                 {revOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={revOpen} timeout="auto" unmountOnExit>
-                {reviewsNew.map(i => {
+                {/* {reviewsNew.map(i => {
                     return (
                         <p key={i.id}>
                             {i.reviewer_name}: {i.review} <br />
                             Rating: {i.item_rating}
                         </p>
                     )
-                })}
+                })} */}
+                <p>{review}</p>
+                
             </Collapse>
             <ListItemButton onClick={handleRevSubOpenClose}>
                 <BorderColorIcon sx={{ paddingRight: 4 }}>
