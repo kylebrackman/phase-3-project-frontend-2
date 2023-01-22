@@ -1,7 +1,9 @@
 
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReviewSubmissionForm from "./ReviewSubmissionForm";
+import { useParams } from 'react-router-dom'
+
 
 // Mui Styles Below
 import { styled } from '@mui/material/styles';
@@ -16,25 +18,41 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 //import Stack from '@mui/material/Stack';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-// import Box from '@mui/material/Box';
+import Box from '@mui/material/Box';
 
 
 
-function ItemCard({ itemId, handleDeleteItem, reviews, review, itemName, itemType }) {
+function ItemCard({ itemId, handleDeleteItem, reviews, itemReviews, itemName, itemType, setReviews, setItems }) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
-    const [reviewsNew, setReviewsNew] = useState(reviews)
+    const [item, setItem] = useState({
+        reviews: [],
+    })
+    //const [reviewsNew, setReviewsNew] = useState(reviews)
+
+
+    const params = useParams()
+
+    useEffect(() => {
+        fetch(`http://localhost:9292/items/${params.id}`)
+            .then(res => res.json())
+            .then(data => {
+                setItem(data)
+            })
+        // eslint-disable-next-line
+    }, [])
+
+    console.log(item)
+
 
     const handleRevSubOpenClose = () => {
         setSubsOpen(!subsOpen);
     };
 
-    const handleAddReviewNew = (newReview) => {
-        setReviewsNew([...reviewsNew, newReview])
-        console.log("Working!")
+    const handleAddReview = (newReview) => {
+        setItem({ ...item, reviews: [...itemReviews, newReview] })
     }
-
 
     function onDeleteItem(id) {
         fetch(`http://localhost:9292/items/${id}`, {
@@ -56,43 +74,48 @@ function ItemCard({ itemId, handleDeleteItem, reviews, review, itemName, itemTyp
     }));
 
     return (
-        <Item >
-            <DeleteIcon onClick={() => onDeleteItem(itemId)}></DeleteIcon>
-            <p>Product Name: {itemName}</p>
-            <p>Product Type: {itemType}</p>
-             <br />
+        <Box sx={{ margin: 4 }}>
+            <Item >
+                <DeleteIcon onClick={() => onDeleteItem(itemId)}></DeleteIcon>
+                <p>Product Name: {itemName}</p>
+                <p>Product Type: {itemType}</p>
+                <br />
+                <ListItemButton onClick={handleReviewOpenClose}>
+                    <ListItemIcon>
+                        <ReviewsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Reviews" />
+                    {revOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={revOpen} timeout="auto" unmountOnExit>
 
-            <br />
-            <ListItemButton onClick={handleReviewOpenClose}>
-                <ListItemIcon>
-                    <ReviewsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Reviews" />
-                {revOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={revOpen} timeout="auto" unmountOnExit>
-                {/* {reviewsNew.map(i => {
-                    return (
-                        <p key={i.id}>
-                            {i.reviewer_name}: {i.review} <br />
-                            Rating: {i.item_rating}
-                        </p>
-                    )
-                })} */}
-                <p>{review}</p>
-                
-            </Collapse>
-            <ListItemButton onClick={handleRevSubOpenClose}>
-                <BorderColorIcon sx={{ paddingRight: 4 }}>
-                    <ReviewsIcon />
-                </BorderColorIcon>
-                <ListItemText primary="Submit a New Review!" />
-                {subsOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-                <ReviewSubmissionForm handleAddReview={handleAddReviewNew} reviews={reviews} itemId={itemId} />
-            </Collapse>
-        </Item>
+                    {
+                        itemReviews.map(i => {
+                            return (
+                                <p key={i.id}>
+                                    {i.reviewer_name}: {i.review} <br />
+                                    Rating: {i.item_rating}
+                                </p>
+                            )
+                        })
+                    }
+
+
+                </Collapse>
+                <ListItemButton onClick={handleRevSubOpenClose}>
+                    <BorderColorIcon sx={{ paddingRight: 4 }}>
+                        <ReviewsIcon />
+                    </BorderColorIcon>
+                    <ListItemText primary="Submit a New Review!" />
+                    {subsOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={subsOpen} timeout="auto" unmountOnExit>
+
+                    <ReviewSubmissionForm handleAddReview={handleAddReview} reviews={reviews} itemId={itemId} />
+
+                </Collapse>
+            </Item>
+        </Box>
     )
 }
 
