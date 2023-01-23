@@ -36,7 +36,6 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
                 setReview("")
                 setItemRating(10)
                 setReviewerName("")
-                console.log(newReview)
             })
     }
 

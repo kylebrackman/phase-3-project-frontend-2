@@ -10,7 +10,6 @@ import Submissions from './Submissions'
 
 function App() {
   const [items, setItems] = useState([])
-  const [reviews, setReviews] = useState([])
 
   useEffect(() => {
     fetch("http://localhost:9292/items")
@@ -20,19 +19,16 @@ function App() {
       })
   }, [])
 
-  useEffect(() => {
-    fetch("http://localhost:9292/reviews")
-      .then(res => res.json())
-      .then(data => {
-        setReviews(data)
-      })
-  }, [])
+  function handleUpdateItems(updatedItemsList) {
+    setItems(updatedItemsList)
+  }
+
 
   return (
     <div className='App'>
       <NavBar />
       <Routes>
-        <Route path="/reviews" element={<ReviewPage items={items} reviews={reviews} setReviews={setReviews} setItems={setItems}/>} />
+        <Route path="/reviews" element={<ReviewPage items={items} handleUpdateItems={handleUpdateItems} />} />
         <Route path="/submissions" element={<Submissions />} />
       </Routes>
     </div>

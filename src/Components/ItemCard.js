@@ -1,8 +1,5 @@
-
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReviewSubmissionForm from "./ReviewSubmissionForm";
-import { useParams } from 'react-router-dom'
 
 
 // Mui Styles Below
@@ -15,43 +12,24 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-//import Stack from '@mui/material/Stack';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import Box from '@mui/material/Box';
 
 
 
-function ItemCard({ itemId, handleDeleteItem, reviews, itemReviews, itemName, itemType, setReviews, setItems }) {
+function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem }) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
-    const [item, setItem] = useState({
-        reviews: [],
-    })
-    //const [reviewsNew, setReviewsNew] = useState(reviews)
-
-
-    const params = useParams()
-
-    useEffect(() => {
-        fetch(`http://localhost:9292/items/${params.id}`)
-            .then(res => res.json())
-            .then(data => {
-                setItem(data)
-            })
-        // eslint-disable-next-line
-    }, [])
-
-    console.log(item)
-
+    const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
 
     const handleRevSubOpenClose = () => {
         setSubsOpen(!subsOpen);
     };
 
     const handleAddReview = (newReview) => {
-        setItem({ ...item, reviews: [...itemReviews, newReview] })
+        setDisplayedReviews([...displayedReviews, newReview])
     }
 
     function onDeleteItem(id) {
@@ -90,7 +68,7 @@ function ItemCard({ itemId, handleDeleteItem, reviews, itemReviews, itemName, it
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
 
                     {
-                        itemReviews.map(i => {
+                        displayedReviews.map(i => {
                             return (
                                 <p key={i.id}>
                                     {i.reviewer_name}: {i.review} <br />
@@ -111,7 +89,7 @@ function ItemCard({ itemId, handleDeleteItem, reviews, itemReviews, itemName, it
                 </ListItemButton>
                 <Collapse in={subsOpen} timeout="auto" unmountOnExit>
 
-                    <ReviewSubmissionForm handleAddReview={handleAddReview} reviews={reviews} itemId={itemId} />
+                    <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} />
 
                 </Collapse>
             </Item>
