@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReviewSubmissionForm from "./ReviewSubmissionForm";
 import EditReview from "./EditReview";
+import DisplayedReviewsComp from "./DisplayedReviewsComp";
 
 
 // Mui Styles Below
@@ -74,7 +75,7 @@ function ItemCard({
                     {revOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
-                    {
+                    {/* {
                         displayedReviews.map(i => {
                             return (
                                 <p key={i.id}>
@@ -83,7 +84,8 @@ function ItemCard({
                                 </p>
                             )
                         })
-                    }
+                    } */}
+                    <DisplayedReviewsComp displayedReviews={displayedReviews} />
                 </Collapse>
                 <ListItemButton onClick={handleRevSubOpenClose}>
                     <BorderColorIcon sx={{ paddingRight: 4 }}>
