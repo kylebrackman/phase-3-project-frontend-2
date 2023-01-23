@@ -43,6 +43,7 @@ function ReviewPage({ items, handleDeleteItems }) {
                 itemReviews={item.reviews}
                 itemName={item.item_name}
                 itemType={item.item_type}
+                onUpdateReview={handleUpdateReview}
             />
         )
     })

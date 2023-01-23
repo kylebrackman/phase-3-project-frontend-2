@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReviewSubmissionForm from "./ReviewSubmissionForm";
+import EditReview from "./EditReview";
 
 
 // Mui Styles Below
@@ -18,10 +19,18 @@ import Box from '@mui/material/Box';
 
 
 
-function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem }) {
+function ItemCard({
+    itemId,
+    itemReviews,
+    itemName,
+    itemType,
+    handleDeleteItem,
+    onUpdateReview
+}) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
     const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
 
     function handleRevSubOpenClose() {
@@ -84,7 +93,7 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                     {subsOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-                    <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} />
+                    <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} onUpdateReview={onUpdateReview}/>
                 </Collapse>
             </Item>
         </Box>
