@@ -52,6 +52,14 @@ function ItemCard({
         setRevOpen(!revOpen);
     };
 
+    function updateReview(updatedReview) {
+        setIsEditing(false)
+    }
+
+    function beginEdit() {
+        setIsEditing(true)
+    }
+
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         ...theme.typography.body2,
@@ -66,7 +74,6 @@ function ItemCard({
                 <DeleteIcon onClick={() => onDeleteItem(itemId)}></DeleteIcon>
                 <p>Product Name: {itemName}</p>
                 <p>Product Type: {itemType}</p>
-                <br />
                 <ListItemButton onClick={handleReviewOpenClose}>
                     <ListItemIcon>
                         <ReviewsIcon />
@@ -75,17 +82,11 @@ function ItemCard({
                     {revOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
-                    {/* {
-                        displayedReviews.map(i => {
-                            return (
-                                <p key={i.id}>
-                                    {i.reviewer_name}: {i.review} <br />
-                                    Rating: {i.item_rating}
-                                </p>
-                            )
-                        })
-                    } */}
-                    <DisplayedReviewsComp displayedReviews={displayedReviews} />
+                    {isEditing ? (
+                        <EditReview /> )
+                        : (
+                            <DisplayedReviewsComp displayedReviews={displayedReviews} onUpdateReview={onUpdateReview} beginEdit={beginEdit}/>
+                        )}
                 </Collapse>
                 <ListItemButton onClick={handleRevSubOpenClose}>
                     <BorderColorIcon sx={{ paddingRight: 4 }}>
@@ -95,7 +96,7 @@ function ItemCard({
                     {subsOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-                    <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} onUpdateReview={onUpdateReview}/>
+                    <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} />
                 </Collapse>
             </Item>
         </Box>
