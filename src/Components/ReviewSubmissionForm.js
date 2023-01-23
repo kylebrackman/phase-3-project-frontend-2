@@ -44,7 +44,6 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
         setItemRating(e.target.value);
     };
 
-
     return (
         <Box>
             <FormControl>

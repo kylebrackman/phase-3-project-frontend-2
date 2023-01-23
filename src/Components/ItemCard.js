@@ -24,11 +24,10 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
     const [subsOpen, setSubsOpen] = useState(false)
     const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
 
-    const handleRevSubOpenClose = () => {
+    function handleRevSubOpenClose() {
         setSubsOpen(!subsOpen);
     };
-
-    const handleAddReview = (newReview) => {
+    function handleAddReview(newReview) {
         setDisplayedReviews([...displayedReviews, newReview])
     }
 
@@ -66,7 +65,6 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                     {revOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
-
                     {
                         displayedReviews.map(i => {
                             return (
@@ -77,8 +75,6 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                             )
                         })
                     }
-
-
                 </Collapse>
                 <ListItemButton onClick={handleRevSubOpenClose}>
                     <BorderColorIcon sx={{ paddingRight: 4 }}>
@@ -88,9 +84,7 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                     {subsOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-
                     <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} />
-
                 </Collapse>
             </Item>
         </Box>

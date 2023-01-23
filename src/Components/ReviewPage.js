@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-//import ReviewSubmissionForm from "./ReviewSubmissionForm";
 import ItemCard from "./ItemCard";
 
 // Mui Styles Below
-//import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 
-function ReviewPage({ items, handleUpdateItems }) {
+function ReviewPage({ items, handleDeleteItems }) {
     // eslint-disable-next-line
     const [reviews, setReviews] = useState([])
 
@@ -20,10 +18,20 @@ function ReviewPage({ items, handleUpdateItems }) {
             })
     }, [])
 
+    function handleUpdateReview(updatedReviewObj) {
+        const updatedReviews= reviews.map(review => {
+          if (review.id === updatedReviewObj.id) {
+            return updatedReviewObj
+          } else {
+            return review;
+          }
+        })
+        setReviews(updatedReviews)
+    }
 
     function handleDeleteItem(id) {
         const updatedItems = items.filter(item => item.id !== id)
-        handleUpdateItems(updatedItems)
+        handleDeleteItems(updatedItems)
     }
 
     const itemCards = items.map(item => {

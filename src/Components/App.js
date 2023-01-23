@@ -19,7 +19,7 @@ function App() {
       })
   }, [])
 
-  function handleUpdateItems(updatedItemsList) {
+  function handleDeleteItems(updatedItemsList) {
     setItems(updatedItemsList)
   }
 
@@ -28,7 +28,7 @@ function App() {
     <div className='App'>
       <NavBar />
       <Routes>
-        <Route path="/reviews" element={<ReviewPage items={items} handleUpdateItems={handleUpdateItems} />} />
+        <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItems={handleDeleteItems} />} />
         <Route path="/submissions" element={<Submissions />} />
       </Routes>
     </div>
