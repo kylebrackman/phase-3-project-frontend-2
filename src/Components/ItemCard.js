@@ -26,7 +26,8 @@ function ItemCard({
     itemName,
     itemType,
     handleDeleteItem,
-    onUpdateReview
+    onUpdateReview,
+    reviews
 }) {
 
     const [revOpen, setRevOpen] = useState(false)
@@ -65,7 +66,7 @@ function ItemCard({
     }));
 
     return (
-        <Box sx={{ margin: 4 }}>
+        <Box sx={{ margin: 4 }} >
             <Item >
                 <p style={{fontSize:20}}>{itemName}</p>
                 <p>Type: {itemType}</p>
@@ -78,7 +79,7 @@ function ItemCard({
                 </ListItemButton>
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
                     {isEditing ? (
-                        <EditReview onUpdateReview={onUpdateReview}/>)
+                        <EditReview displayedReviews={displayedReviews} onUpdateReview={onUpdateReview} itemId={itemId}/>)
                         : (
                             <DisplayedReviewsComp
                                 displayedReviews={displayedReviews}

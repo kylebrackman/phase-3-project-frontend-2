@@ -25,7 +25,7 @@ function App() {
 
 
   return (
-    <div className='App'>
+    <div>
       <NavBar />
       <Routes>
         <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItems={handleDeleteItems} />} />

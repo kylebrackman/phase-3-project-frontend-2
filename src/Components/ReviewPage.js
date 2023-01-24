@@ -44,13 +44,14 @@ function ReviewPage({ items, handleDeleteItems }) {
                 itemName={item.item_name}
                 itemType={item.item_type}
                 onUpdateReview={handleUpdateReview}
+                reviews={item.reviews}
             />
         )
     })
 
     return (
-        <Box key={items.id} sx={{ margin: 4, flexGrow: 1 }} >
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }} >
+        <Box key={items.id} sx={{ paddingTop:10, alignItems:"center", marginLeft: 20 }} >
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ }} >
                 <Grid item xs={4}></Grid>
                 {itemCards}
             </Grid>

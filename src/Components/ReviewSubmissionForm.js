@@ -42,12 +42,12 @@ function ReviewSubmissionForm({ handleAddReview, itemId, onUpdateReview }) {
     }
 
 
-    const handleChange = (e) => {
+    const handleRating = (e) => {
         setItemRating(e.target.value);
     };
 
     return (
-        <Box>
+        <Box key={itemId}>
             <FormControl>
                 <p>Name:</p>
                 <TextField onChange={(e) => setReviewerName(e.target.value)}></TextField>
@@ -56,7 +56,7 @@ function ReviewSubmissionForm({ handleAddReview, itemId, onUpdateReview }) {
                 <TextField onChange={(e) => setReview(e.target.value)}></TextField>
                 <br />
                 <p>Rating 1-10</p>
-                <Select labelId="demo-simple-select-label" id="demo-simple-select" value={itemRating} label="" onChange={handleChange} >
+                <Select labelId="demo-simple-select-label" id="demo-simple-select" value={itemRating} label="" onChange={handleRating} >
                     <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>3</MenuItem>
                     <MenuItem value={3}>3</MenuItem>
