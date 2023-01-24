@@ -1,8 +1,13 @@
 import React from "react";
 
-function Submissions () {
+import Box from '@mui/material/Box';
+import { FormControl } from "@mui/material";
+
+function Submissions() {
     return (
-        <p>Test</p>
+        <FormControl>
+                <Box sx={{ bgcolor: '#282c34', height: '100vh' }} />
+        </FormControl>
     )
 }
 

@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 
-
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
+import { TextField, Select, MenuItem, FormControl, Button, Box } from "@mui/material";
 
 
 function ReviewSubmissionForm({ handleAddReview, itemId }) {

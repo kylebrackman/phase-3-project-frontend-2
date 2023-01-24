@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-
-
+import { TextField, Select, MenuItem, FormControl, Button, Box } from "@mui/material";
 
 function EditReview({ displayedReviews, onUpdateReview, itemId, toggleEdit }) {
     const [itemRating, setItemRating] = useState(10)

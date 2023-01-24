@@ -6,17 +6,12 @@ import DisplayedReviewsComp from "./DisplayedReviewsComp";
 
 // Mui Styles Below
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { Paper, ListItemButton, ListItemIcon, ListItemText, Collapse, Box } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import Box from '@mui/material/Box';
 
 
 
@@ -97,7 +92,7 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                         />
                     )}
                 </Collapse>
-                
+
                 <ListItemButton onClick={handleRevSubOpenClose}>
                     <BorderColorIcon sx={{ paddingRight: 4 }}>
                         <ReviewsIcon />
