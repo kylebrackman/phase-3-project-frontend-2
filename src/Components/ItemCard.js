@@ -67,8 +67,8 @@ function ItemCard({
     return (
         <Box sx={{ margin: 4 }}>
             <Item >
-                <p>Product Name: {itemName}</p>
-                <p>Product Type: {itemType}</p>
+                <p style={{fontSize:20}}>{itemName}</p>
+                <p>Type: {itemType}</p>
                 <ListItemButton onClick={handleReviewOpenClose}>
                     <ListItemIcon>
                         <ReviewsIcon />
@@ -83,6 +83,7 @@ function ItemCard({
                             <DisplayedReviewsComp
                                 displayedReviews={displayedReviews}
                                 beginEdit={beginEdit}
+                                itemId={itemId}
                             />
                         )}
                 </Collapse>

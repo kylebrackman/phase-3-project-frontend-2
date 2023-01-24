@@ -14,6 +14,8 @@ function ReviewSubmissionForm({ handleAddReview, itemId, onUpdateReview }) {
     const [itemRating, setItemRating] = useState(10)
     const [reviewerName, setReviewerName] = useState("")
 
+    // function updateReview
+
 
     const onAddReview = (e) => {
         e.preventDefault();
@@ -54,8 +56,7 @@ function ReviewSubmissionForm({ handleAddReview, itemId, onUpdateReview }) {
                 <TextField onChange={(e) => setReview(e.target.value)}></TextField>
                 <br />
                 <p>Rating 1-10</p>
-                <Select labelId="demo-simple-select-label" id="demo-simple-select" value={itemRating} label="Age" onChange={handleChange}
-                >
+                <Select labelId="demo-simple-select-label" id="demo-simple-select" value={itemRating} label="" onChange={handleChange} >
                     <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>3</MenuItem>
                     <MenuItem value={3}>3</MenuItem>
