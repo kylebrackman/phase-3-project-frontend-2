@@ -52,10 +52,6 @@ function ItemCard({
         setRevOpen(!revOpen);
     };
 
-    function updateReview(updatedReview) {
-        setIsEditing(false)
-    }
-
     function beginEdit() {
         setIsEditing(true)
     }
@@ -71,7 +67,6 @@ function ItemCard({
     return (
         <Box sx={{ margin: 4 }}>
             <Item >
-                <DeleteIcon onClick={() => onDeleteItem(itemId)}></DeleteIcon>
                 <p>Product Name: {itemName}</p>
                 <p>Product Type: {itemType}</p>
                 <ListItemButton onClick={handleReviewOpenClose}>
@@ -83,9 +78,12 @@ function ItemCard({
                 </ListItemButton>
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
                     {isEditing ? (
-                        <EditReview /> )
+                        <EditReview onUpdateReview={onUpdateReview}/>)
                         : (
-                            <DisplayedReviewsComp displayedReviews={displayedReviews} onUpdateReview={onUpdateReview} beginEdit={beginEdit}/>
+                            <DisplayedReviewsComp
+                                displayedReviews={displayedReviews}
+                                beginEdit={beginEdit}
+                            />
                         )}
                 </Collapse>
                 <ListItemButton onClick={handleRevSubOpenClose}>
@@ -98,6 +96,8 @@ function ItemCard({
                 <Collapse in={subsOpen} timeout="auto" unmountOnExit>
                     <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} />
                 </Collapse>
+                <p>Delete Item</p>
+                <DeleteIcon onClick={() => onDeleteItem(itemId)}></DeleteIcon>
             </Item>
         </Box>
     )
