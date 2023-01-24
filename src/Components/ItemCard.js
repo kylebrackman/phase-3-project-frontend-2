@@ -20,42 +20,12 @@ import Box from '@mui/material/Box';
 
 
 
-function ItemCard({
-    itemId,
-    itemReviews,
-    itemName,
-    itemType,
-    handleDeleteItem,
-    onUpdateReview,
-    reviews
-}) {
+function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem }) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
-
-    function handleRevSubOpenClose() {
-        setSubsOpen(!subsOpen);
-    };
-    function handleAddReview(newReview) {
-        setDisplayedReviews([...displayedReviews, newReview])
-    }
-
-    function onDeleteItem(id) {
-        fetch(`http://localhost:9292/items/${id}`, {
-            method: "DELETE",
-        })
-            .then(() => handleDeleteItem(id))
-    }
-
-    const handleReviewOpenClose = () => {
-        setRevOpen(!revOpen);
-    };
-
-    function beginEdit() {
-        setIsEditing(true)
-    }
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -65,10 +35,44 @@ function ItemCard({
         color: theme.palette.text.secondary,
     }));
 
+    function toggleEdit() {
+        setIsEditing(!isEditing)
+    };
+
+    function handleRevSubOpenClose() {
+        setSubsOpen(!subsOpen);
+    };
+
+    function handleAddReview(newReview) {
+        setDisplayedReviews([...displayedReviews, newReview])
+    };
+
+    function handleReviewOpenClose() {
+        setRevOpen(!revOpen);
+    };
+
+    function onDeleteItem(id) {
+        fetch(`http://localhost:9292/items/${id}`, {
+            method: "DELETE",
+        })
+            .then(() => handleDeleteItem(id))
+    }
+
+    function handleUpdateReview(updatedReviewObj) {
+        const updatedReviews = displayedReviews.map(review => {
+            if (review.id === updatedReviewObj.id) {
+                return updatedReviewObj
+            } else {
+                return review;
+            }
+        })
+        setDisplayedReviews(updatedReviews)
+    }
+
     return (
         <Box sx={{ margin: 4 }} >
             <Item >
-                <p style={{fontSize:20}}>{itemName}</p>
+                <p style={{ fontSize: 20 }}>{itemName}</p>
                 <p>Type: {itemType}</p>
                 <ListItemButton onClick={handleReviewOpenClose}>
                     <ListItemIcon>
@@ -77,17 +81,23 @@ function ItemCard({
                     <ListItemText primary="Reviews" />
                     {revOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
+
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
                     {isEditing ? (
-                        <EditReview displayedReviews={displayedReviews} onUpdateReview={onUpdateReview} itemId={itemId}/>)
-                        : (
-                            <DisplayedReviewsComp
-                                displayedReviews={displayedReviews}
-                                beginEdit={beginEdit}
-                                itemId={itemId}
-                            />
-                        )}
+                        <EditReview
+                            displayedReviews={displayedReviews}
+                            onUpdateReview={handleUpdateReview}
+                            itemId={itemId}
+                            toggleEdit={toggleEdit} />
+                    ) : (
+                        <DisplayedReviewsComp
+                            displayedReviews={displayedReviews}
+                            toggleEdit={toggleEdit}
+                            itemId={itemId}
+                        />
+                    )}
                 </Collapse>
+                
                 <ListItemButton onClick={handleRevSubOpenClose}>
                     <BorderColorIcon sx={{ paddingRight: 4 }}>
                         <ReviewsIcon />

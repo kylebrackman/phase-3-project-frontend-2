@@ -13,17 +13,12 @@ function EditReview({ displayedReviews, onUpdateReview, itemId, toggleEdit }) {
     const [itemRating, setItemRating] = useState(10)
     const [review, setReview] = useState("")
 
-
-    // add exit edit button, use a large X button if available
-
     const handleRating = (e) => {
         setItemRating(e.target.value)
     };
 
-
-
     const editDisplay = displayedReviews.map(r => {
-
+        
         function handleEditReview(e) {
             e.preventDefault();
     
@@ -40,7 +35,7 @@ function EditReview({ displayedReviews, onUpdateReview, itemId, toggleEdit }) {
             })
                 .then((r) => r.json())
                 .then((updatedReview) => onUpdateReview(updatedReview))
-                // exit editing mode somehow
+                .then(toggleEdit)
         }
 
         return (

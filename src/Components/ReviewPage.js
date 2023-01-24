@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ItemCard from "./ItemCard";
 
-// Mui Styles Below
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
@@ -18,16 +17,6 @@ function ReviewPage({ items, handleDeleteItems }) {
             })
     }, [])
 
-    function handleUpdateReview(updatedReviewObj) {
-        const updatedReviews= reviews.map(review => {
-          if (review.id === updatedReviewObj.id) {
-            return updatedReviewObj
-          } else {
-            return review;
-          }
-        })
-        setReviews(updatedReviews)
-    }
 
     function handleDeleteItem(id) {
         const updatedItems = items.filter(item => item.id !== id)
@@ -43,7 +32,6 @@ function ReviewPage({ items, handleDeleteItems }) {
                 itemReviews={item.reviews}
                 itemName={item.item_name}
                 itemType={item.item_type}
-                onUpdateReview={handleUpdateReview}
                 reviews={item.reviews}
             />
         )

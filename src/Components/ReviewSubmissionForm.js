@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 
 
-function ReviewSubmissionForm({ handleAddReview, itemId, onUpdateReview }) {
+function ReviewSubmissionForm({ handleAddReview, itemId }) {
     const [review, setReview] = useState("")
     const [itemRating, setItemRating] = useState(10)
     const [reviewerName, setReviewerName] = useState("")
