@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ItemCard from "./ItemCard";
 
 import { Box, Grid } from "@mui/material";
@@ -6,17 +6,6 @@ import { Box, Grid } from "@mui/material";
 
 
 function ReviewPage({ items, handleDeleteItems }) {
-    // eslint-disable-next-line
-    const [reviews, setReviews] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:9292/reviews")
-            .then(res => res.json())
-            .then(data => {
-                setReviews(data)
-            })
-    }, [])
-
 
     function handleDeleteItem(id) {
         const updatedItems = items.filter(item => item.id !== id)
