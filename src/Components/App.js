@@ -23,13 +23,17 @@ function App() {
     setItems(updatedItemsList)
   }
 
+  function handleAddItem(newItem){
+    setItems([...items, newItem])
+  }
+
 
   return (
     <div>
       <NavBar />
       <Routes>
         <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItems={handleDeleteItems} />} />
-        <Route path="/submissions" element={<Submissions />} />
+        <Route path="/submissions" element={<Submissions onAddItem={handleAddItem}/>} />
       </Routes>
     </div>
   );

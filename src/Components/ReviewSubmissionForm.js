@@ -11,7 +11,7 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
     // function updateReview
 
 
-    const onAddReview = (e) => {
+    function onAddReview(e) {
         e.preventDefault();
 
         fetch("http://localhost:9292/reviews", {

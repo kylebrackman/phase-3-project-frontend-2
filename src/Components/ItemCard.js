@@ -67,7 +67,7 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
     return (
         <Box sx={{ margin: 4 }} >
             <Item >
-                <p style={{ fontSize: 20 }}>{itemName}</p>
+                <p style={{ fontSize: 20, color: "black" }}>{itemName}</p>
                 <p>Type: {itemType}</p>
                 <ListItemButton onClick={handleReviewOpenClose}>
                     <ListItemIcon>
