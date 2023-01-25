@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ReviewSubmissionForm from "./ReviewSubmissionForm";
-import EditReview from "./EditReview";
 import DisplayedReviewsComp from "./DisplayedReviewsComp";
 
 
@@ -19,7 +18,6 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
-    const [isEditing, setIsEditing] = useState(false)
     const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -30,9 +28,9 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
         color: theme.palette.text.secondary,
     }));
 
-    function toggleEdit() {
-        setIsEditing(!isEditing)
-    };
+    // function toggleEdit() {
+    //     setIsEditing(!isEditing)
+    // };
 
     function handleRevSubOpenClose() {
         setSubsOpen(!subsOpen);
@@ -78,19 +76,19 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                 </ListItemButton>
 
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
-                    {isEditing ? (
+                    {/* {isEditing ? (
                         <EditReview
                             displayedReviews={displayedReviews}
                             onUpdateReview={handleUpdateReview}
                             itemId={itemId}
                             toggleEdit={toggleEdit} />
-                    ) : (
+                    ) : ( */}
                         <DisplayedReviewsComp
                             displayedReviews={displayedReviews}
-                            toggleEdit={toggleEdit}
                             itemId={itemId}
                         />
-                    )}
+                    {/* )} */}
+                    
                 </Collapse>
 
                 <ListItemButton onClick={handleRevSubOpenClose}>

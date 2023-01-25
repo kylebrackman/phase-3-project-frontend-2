@@ -1,22 +1,14 @@
 import React, { useState } from "react";
+import '../index.css';
 
-import { TextField, Select, MenuItem, FormControl, Button, Stack, Paper, Box, Grid } from "@mui/material";
-import { styled } from '@mui/material/styles';
+
+import { TextField, Select, MenuItem, FormControl, Button, Box, Container } from "@mui/material";
 
 
 function Submissions({ onAddItem }) {
 
     const [itemName, setItemName] = useState("")
     const [itemType, setItemType] = useState("Item Type")
-
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-        width: 750
-    }));
 
     function handleType(e) {
         setItemType(e.target.value);
@@ -44,25 +36,29 @@ function Submissions({ onAddItem }) {
     }
 
     return (
-            <Box sx={{alignContent: "center"}}>
-                <FormControl>
-                    <p style={{ fontSize: 20 }}>Submit a New Item!</p>
-                    <p>Item Name</p>
-                    <TextField onChange={(e) => setItemName(e.target.value)}></TextField>
-                    <p>Item Type</p>
-                    <Select value={itemType} onChange={handleType}>
-                        <MenuItem value={"Item Type"}>Item Type</MenuItem>
-                        <MenuItem value={"Outerwear"}>Outerwear</MenuItem>
-                        <MenuItem value={"Hardware"}>Hardware</MenuItem>
-                        <MenuItem value={"Shoes"}>Shoes</MenuItem>
-                        <MenuItem value={"Clothing"}>Clothing</MenuItem>
-                        <MenuItem value={"Training Gear"}>Training Gear</MenuItem>
-                        <MenuItem value={"Misc."}>Misc.</MenuItem>
-                    </Select>
-                    <br />
-                    <Button variant="outlined" onClick={handleAddItem}>Submit!</Button>
-                </FormControl>
-            </Box>
+        <div style={{width: 500, margin: "auto", background: "white", alignItems: "center", marginTop: 20, paddingBottom: 10, borderRadius: 6}}>
+            <Container>
+                <Box >
+                    <FormControl sx={{alignItems: "center"}}>
+                        <p style={{ fontSize: 20 }}>Submit a New Item!</p>
+                        <p>Item Name</p>
+                        <TextField onChange={(e) => setItemName(e.target.value)}></TextField>
+                        <p>Item Type</p>
+                        <Select value={itemType} onChange={handleType}>
+                            <MenuItem value={"Item Type"}>Item Type</MenuItem>
+                            <MenuItem value={"Outerwear"}>Outerwear</MenuItem>
+                            <MenuItem value={"Hardware"}>Hardware</MenuItem>
+                            <MenuItem value={"Shoes"}>Shoes</MenuItem>
+                            <MenuItem value={"Clothing"}>Clothing</MenuItem>
+                            <MenuItem value={"Training Gear"}>Training Gear</MenuItem>
+                            <MenuItem value={"Misc."}>Misc.</MenuItem>
+                        </Select>
+                        <br />
+                        <Button variant="outlined" onClick={handleAddItem}>Submit!</Button>
+                    </FormControl>
+                </Box>
+            </Container>
+        </div>
     )
 }
 
