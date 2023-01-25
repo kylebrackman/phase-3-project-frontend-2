@@ -86,7 +86,7 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                         <DisplayedReviewsComp
                             displayedReviews={displayedReviews}
                             itemId={itemId}
-                            handleUpdateReview={handleUpdateReview}
+                            onUpdateReview={handleUpdateReview}
                         />
                     {/* )} */}
                     

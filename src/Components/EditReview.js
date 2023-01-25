@@ -6,6 +6,7 @@ function EditReview({ displayedReviews, onUpdateReview, itemId, toggleEdit }) {
     const [itemRating, setItemRating] = useState(10)
     const [review, setReview] = useState("")
 
+
     const handleRating = (e) => {
         setItemRating(e.target.value)
     };

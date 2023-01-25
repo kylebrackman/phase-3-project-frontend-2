@@ -4,14 +4,13 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Box from '@mui/material/Box';
 import EditReview from "./EditReview";
 
-function ReviewCard({ reviewerName, review, rating, displayedReviews, handleUpdateReview}) {
+function ReviewCard({ reviewerName, review, rating, displayedReviews, onUpdateReview }) {
     const [isEditing, setIsEditing] = useState(false)
 
     function toggleEdit() {
         setIsEditing(!isEditing)
     };
 
-    
     return (
         <div>
             <Box sx={{ borderBottom: 2 }}>
@@ -21,8 +20,8 @@ function ReviewCard({ reviewerName, review, rating, displayedReviews, handleUpda
                     Rating: {rating}
                 </p>
                 <p style={{ fontSize: 12 }}>Edit Review <EditOutlinedIcon fontSize="small" onClick={() => toggleEdit((isEditing) => !isEditing)} /></p>
+                <EditReview onUpdateReview={onUpdateReview} displayedReviews={displayedReviews}/>
             </Box>
-            {/* <EditReview displayedReviews={displayedReviews} handleUpdateReview={handleUpdateReview}/> */}
         </div>
     )
 }
