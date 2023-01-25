@@ -11,6 +11,7 @@ function ReviewCard({ reviewerName, review, rating, displayedReviews, handleUpda
         setIsEditing(!isEditing)
     };
 
+    
     return (
         <div>
             <Box sx={{ borderBottom: 2 }}>
@@ -21,6 +22,7 @@ function ReviewCard({ reviewerName, review, rating, displayedReviews, handleUpda
                 </p>
                 <p style={{ fontSize: 12 }}>Edit Review <EditOutlinedIcon fontSize="small" onClick={() => toggleEdit((isEditing) => !isEditing)} /></p>
             </Box>
+            {/* <EditReview displayedReviews={displayedReviews} handleUpdateReview={handleUpdateReview}/> */}
         </div>
     )
 }
