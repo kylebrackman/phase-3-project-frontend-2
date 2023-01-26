@@ -8,9 +8,6 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
     const [itemRating, setItemRating] = useState(10)
     const [reviewerName, setReviewerName] = useState("")
 
-    // function updateReview
-
-
     function onAddReview(e) {
         e.preventDefault();
 

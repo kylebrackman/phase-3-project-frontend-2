@@ -3,7 +3,12 @@ import React from "react";
 import ReviewCard from "./ReviewCard";
 
 
-function DisplayedReviewsComp({ displayedReviews, onUpdateReview }) {
+function DisplayedReviewsComp({ displayedReviews, onUpdateReview, handleDeleteReview }) {
+
+    function onDeleteReview(id) {
+        const updatedReviews = displayedReviews.filter(review => review.id !== id)
+        handleDeleteReview(updatedReviews)
+    }
 
     const reviewDisplay = displayedReviews.map(r => {
         return (
@@ -14,6 +19,7 @@ function DisplayedReviewsComp({ displayedReviews, onUpdateReview }) {
                 rating={r.item_rating}
                 displayedReviews={displayedReviews}
                 onUpdateReview={onUpdateReview}
+                onDeleteReview={onDeleteReview}
             />
         )
     })

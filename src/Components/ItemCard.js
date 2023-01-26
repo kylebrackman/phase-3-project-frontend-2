@@ -28,9 +28,9 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
         color: theme.palette.text.secondary,
     }));
 
-    // function toggleEdit() {
-    //     setIsEditing(!isEditing)
-    // };
+    function handleDeleteReview(updatedReviewList) {
+        setDisplayedReviews(updatedReviewList)
+    }
 
     function handleRevSubOpenClose() {
         setSubsOpen(!subsOpen);
@@ -76,19 +76,13 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                 </ListItemButton>
 
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
-                    {/* {isEditing ? (
-                        <EditReview
-                            displayedReviews={displayedReviews}
-                            onUpdateReview={handleUpdateReview}
-                            itemId={itemId}
-                            toggleEdit={toggleEdit} />
-                    ) : ( */}
+
                         <DisplayedReviewsComp
                             displayedReviews={displayedReviews}
                             itemId={itemId}
                             onUpdateReview={handleUpdateReview}
+                            handleDeleteReview={handleDeleteReview}
                         />
-                    {/* )} */}
                     
                 </Collapse>
 
