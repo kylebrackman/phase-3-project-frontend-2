@@ -1,5 +1,6 @@
-import React, { useState, Navigate } from "react";
+import React, { useState } from "react";
 import '../index.css';
+import { useNavigate } from "react-router-dom";
 
 
 import { TextField, Select, MenuItem, FormControl, Button, Box, Container } from "@mui/material";
@@ -9,6 +10,7 @@ function Submissions({ onAddItem }) {
 
     const [itemName, setItemName] = useState("")
     const [itemType, setItemType] = useState("Item Type")
+    const navigate = useNavigate()
 
     function handleType(e) {
         setItemType(e.target.value);
@@ -33,6 +35,7 @@ function Submissions({ onAddItem }) {
             })
             .then(setItemType("Item Type"))
             .then(setItemName(""))
+            .then(navigate("/reviews"))
     }
 
     return (
