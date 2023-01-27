@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Navigate } from "react";
 import '../index.css';
 
 
@@ -30,9 +30,9 @@ function Submissions({ onAddItem }) {
             .then((r) => r.json())
             .then((newItem) => {
                 onAddItem(newItem)
-                setItemName("")
-                setItemType("Item Type")
             })
+            .then(setItemType("Item Type"))
+            .then(setItemName(""))
     }
 
     return (
@@ -42,7 +42,7 @@ function Submissions({ onAddItem }) {
                     <FormControl sx={{alignItems: "center"}}>
                         <p style={{ fontSize: 20 }}>Submit a New Item!</p>
                         <p>Item Name</p>
-                        <TextField onChange={(e) => setItemName(e.target.value)}></TextField>
+                        <TextField value={itemName} onChange={(e) => setItemName(e.target.value)}></TextField>
                         <p>Item Type</p>
                         <Select value={itemType} onChange={handleType}>
                             <MenuItem value={"Item Type"}>Item Type</MenuItem>
