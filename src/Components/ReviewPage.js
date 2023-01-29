@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
 
 import { Box, Grid } from "@mui/material";
@@ -7,11 +7,21 @@ import { Stack } from "@mui/system";
 
 
 function ReviewPage({ items, handleDeleteItems }) {
+    const [itemReviews, setItemReviews] = useState([])
 
     function handleDeleteItem(id) {
         const updatedItems = items.filter(item => item.id !== id)
         handleDeleteItems(updatedItems)
     }
+    
+
+    useEffect(() => {
+        fetch("http://localhost:9292/reviews")
+          .then(res => res.json())
+          .then(data => {
+            setItemReviews(data)
+          })
+      }, [])
 
     const itemCards = items.map(item => {
         return (
@@ -19,10 +29,10 @@ function ReviewPage({ items, handleDeleteItems }) {
                 key={item.id}
                 itemId={item.id}
                 handleDeleteItem={handleDeleteItem}
-                itemReviews={item.reviews}
+                itemReviews={itemReviews}
                 itemName={item.item_name}
                 itemType={item.item_type}
-                reviews={item.reviews}
+                reviews={itemReviews}
             />
         )
     })
