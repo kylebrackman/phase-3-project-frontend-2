@@ -40,8 +40,8 @@ function ItemCard({ item, handleDeleteItem, handleSetItems, updateItem, handleSe
     };
 
     function handleAddReview(newReview) {
-        const newItem = {...item, reviews: [...item.reviews, newReview]}
-        handleSetItem(newItem)
+        item.reviews = [...item.reviews, newReview]
+        updateItem(item)
     };
 
     function handleReviewOpenClose() {
@@ -65,7 +65,6 @@ function ItemCard({ item, handleDeleteItem, handleSetItems, updateItem, handleSe
         })
         item.reviews = updatedReviews
         updateItem(item)
-        console.log("in item card", item)
     }
 
     return (

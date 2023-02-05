@@ -8,10 +8,6 @@ import { Stack } from "@mui/system";
 
 function ReviewPage({ items, handleDeleteItem, handleSetItems, handleAddReviewToItem, updateItem, handleSetItem}) {
 
-    // function temp (item) {
-    //     console.log("REVIEW PAGE", item)
-    // }
-
     const itemCards = items.map(item => {
         return (
             <ItemCard
@@ -21,7 +17,7 @@ function ReviewPage({ items, handleDeleteItem, handleSetItems, handleAddReviewTo
                 handleSetItem={handleSetItem}
                 handleSetItems={handleSetItems}
                 handleAddReviewToItem={handleAddReviewToItem}
-                updateItem={() => updateItem(item)}
+                updateItem={updateItem}
             />
         )
     })

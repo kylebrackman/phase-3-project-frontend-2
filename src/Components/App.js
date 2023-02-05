@@ -18,8 +18,6 @@ function App() {
         setItems(data)
       })
   }, [])
-  console.log(items)
-
 
   function handleDeleteItem(id) {
     const updatedItems = items.filter(item => item.id !== id)
@@ -34,9 +32,6 @@ function App() {
     setItems([...items, updatedItems])
   }
 
-  // create function "addReviewToItem"
-  // same thing for deleting a review, use 'setItems'
-  // how do i create a function that adds a review to item, while using setItems?
   function handleSetItem(newItem) {
     const newItemList = items.filter(i => i.id !== newItem.id)
     setItems([...newItemList, newItem])
