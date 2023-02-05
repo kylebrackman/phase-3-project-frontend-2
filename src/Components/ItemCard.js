@@ -14,11 +14,12 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 
 
-function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem }) {
+function ItemCard({ item, handleDeleteItem, handleSetItems, handleDeleteReviewFromItem, handleSetItem}) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
-    const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
+    // const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
+
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -28,8 +29,8 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
         color: theme.palette.text.secondary,
     }));
 
-    function handleDeleteReview(updatedReviewList) {
-        setDisplayedReviews(updatedReviewList)
+    function handleDeleteReview(reviewId) {
+        handleDeleteReviewFromItem(item, reviewId)
     }
 
     function handleRevSubOpenClose() {
@@ -37,7 +38,8 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
     };
 
     function handleAddReview(newReview) {
-        setDisplayedReviews([...displayedReviews, newReview])
+        const newItem = {...item, reviews: [...item.reviews, newReview]}
+        handleSetItem(newItem)
     };
 
     function handleReviewOpenClose() {
@@ -52,21 +54,21 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
     }
 
     function handleUpdateReview(updatedReviewObj) {
-        const updatedReviews = displayedReviews.map(review => {
+        const updatedReviews = item.reviews.map(review => {
             if (review.id === updatedReviewObj.id) {
                 return updatedReviewObj
             } else {
                 return review;
             }
         })
-        setDisplayedReviews(updatedReviews)
+        handleSetItems(updatedReviews)
     }
 
     return (
         <Box sx={{ margin: 4 }} >
             <Item >
-                <p style={{ fontSize: 20, color: "black" }}>{itemName}</p>
-                <p>Type: {itemType}</p>
+                <p style={{ fontSize: 20, color: "black" }}>{item.item_name}</p>
+                <p>Type: {item.item_type}</p>
                 <ListItemButton onClick={handleReviewOpenClose}>
                     <ListItemIcon>
                         <ReviewsIcon />
@@ -77,13 +79,13 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
 
                 <Collapse in={revOpen} timeout="auto" unmountOnExit>
 
-                        <DisplayedReviewsComp
-                            displayedReviews={displayedReviews}
-                            itemId={itemId}
-                            onUpdateReview={handleUpdateReview}
-                            handleDeleteReview={handleDeleteReview}
-                        />
-                    
+                    <DisplayedReviewsComp
+                        displayedReviews={item.reviews}
+                        itemId={item.id}
+                        onUpdateReview={handleUpdateReview}
+                        handleDeleteReview={handleDeleteReview}
+                    />
+
                 </Collapse>
 
                 <ListItemButton onClick={handleRevSubOpenClose}>
@@ -94,10 +96,10 @@ function ItemCard({ itemId, itemReviews, itemName, itemType, handleDeleteItem })
                     {subsOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={subsOpen} timeout="auto" unmountOnExit>
-                    <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={itemId} />
+                    <ReviewSubmissionForm handleAddReview={handleAddReview} itemId={item.id} />
                 </Collapse>
                 <p>Delete Item</p>
-                <DeleteIcon onClick={() => onDeleteItem(itemId)}></DeleteIcon>
+                <DeleteIcon onClick={() => onDeleteItem(item.id)}></DeleteIcon>
             </Item>
         </Box>
     )

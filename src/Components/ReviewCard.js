@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import EditReview from "./EditReview";
+
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Box from '@mui/material/Box';
-import EditReview from "./EditReview";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 function ReviewCard({ reviewerName, review, rating, onUpdateReview, onDeleteReview }) {
@@ -17,6 +18,7 @@ function ReviewCard({ reviewerName, review, rating, onUpdateReview, onDeleteRevi
             method: "DELETE",
         })
             .then(() => onDeleteReview(id))
+            console.log(id)
     }
 
     return (

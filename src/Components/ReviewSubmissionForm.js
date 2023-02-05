@@ -25,6 +25,7 @@ function ReviewSubmissionForm({ handleAddReview, itemId }) {
         })
             .then((r) => r.json())
             .then((newReview) => {
+                console.log(newReview)
                 handleAddReview(newReview)
                 setReview("")
                 setItemRating(10)

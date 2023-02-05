@@ -19,7 +19,7 @@ function DisplayedReviewsComp({ displayedReviews, onUpdateReview, handleDeleteRe
                 rating={r.item_rating}
                 displayedReviews={displayedReviews}
                 onUpdateReview={onUpdateReview}
-                onDeleteReview={onDeleteReview}
+                onDeleteReview={onDeleteReview}              
             />
         )
     })
