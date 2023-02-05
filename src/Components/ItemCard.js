@@ -14,7 +14,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 
 
-function ItemCard({ item, handleDeleteItem, handleSetItems, updateItem, handleSetItem}) {
+function ItemCard({ item, handleDeleteItem, updateItem }) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)

@@ -6,7 +6,7 @@ import { Stack } from "@mui/system";
 
 
 
-function ReviewPage({ items, handleDeleteItem, handleSetItems, handleAddReviewToItem, updateItem, handleSetItem}) {
+function ReviewPage({ items, handleDeleteItem, handleAddReviewToItem, updateItem }) {
 
     const itemCards = items.map(item => {
         return (
@@ -14,8 +14,6 @@ function ReviewPage({ items, handleDeleteItem, handleSetItems, handleAddReviewTo
                 item={item}
                 key={item.id}
                 handleDeleteItem={handleDeleteItem}
-                handleSetItem={handleSetItem}
-                handleSetItems={handleSetItems}
                 handleAddReviewToItem={handleAddReviewToItem}
                 updateItem={updateItem}
             />

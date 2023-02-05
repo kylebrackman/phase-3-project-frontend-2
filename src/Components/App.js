@@ -28,15 +28,6 @@ function App() {
     setItems([...items, newItem])
   }
 
-  function handleSetItems(updatedItems) {
-    setItems([...items, updatedItems])
-  }
-
-  function handleSetItem(newItem) {
-    const newItemList = items.filter(i => i.id !== newItem.id)
-    setItems([...newItemList, newItem])
-  }
-
   function updateItem(newItem) {
     const updatedItems = items.map(item => {
       if (item.id === newItem.id) {
@@ -47,12 +38,11 @@ function App() {
     setItems(updatedItems);
   }
 
-
   return (
     <div>
       <NavBar />
       <Routes>
-        <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItem={handleDeleteItem} handleSetItems={handleSetItems}  handleSetItem={handleSetItem} updateItem={updateItem}/>} />
+        <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItem={handleDeleteItem} updateItem={updateItem}/>} />
         <Route path="/submissions" element={<Submissions onAddItem={handleAddItem} />} />
       </Routes>
     </div>
