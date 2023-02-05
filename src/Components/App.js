@@ -41,11 +41,11 @@ function App() {
   }
 
   function handleDeleteReviewFromItem(item, reviewId) {
-    console.log(item)
     const newReviews = item.reviews.filter(r => reviewId !== r.id)
-    console.log(item)
     const newItem = {...item, reviews: newReviews}
+    console.log("ITEM TEST 1", item)
     handleSetItem(newItem)
+    console.log("ITEM TEST 2", newItem)
   }
 
 

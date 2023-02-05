@@ -61,7 +61,10 @@ function ItemCard({ item, handleDeleteItem, handleSetItems, handleDeleteReviewFr
                 return review;
             }
         })
-        handleSetItems(updatedReviews)
+        const newItem = {...item, reviews: [...item.reviews, updatedReviews]}
+
+        // this needs to change because it is setting items to reviews
+        handleSetItem(newItem)
     }
 
     return (
