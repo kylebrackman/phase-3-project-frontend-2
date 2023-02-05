@@ -14,12 +14,10 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 
 
-function ItemCard({ item, handleDeleteItem, handleSetItems, handleDeleteReviewFromItem, handleSetItem}) {
+function ItemCard({ item, handleDeleteItem, handleSetItems, updateItem, handleSetItem}) {
 
     const [revOpen, setRevOpen] = useState(false)
     const [subsOpen, setSubsOpen] = useState(false)
-    // const [displayedReviews, setDisplayedReviews] = useState(itemReviews)
-
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -30,7 +28,11 @@ function ItemCard({ item, handleDeleteItem, handleSetItems, handleDeleteReviewFr
     }));
 
     function handleDeleteReview(reviewId) {
-        handleDeleteReviewFromItem(item, reviewId)
+        const updatedReviews = item.reviews.filter(rev => {
+            return (rev.id !== reviewId)
+        })
+        item.reviews = updatedReviews
+        updateItem(item)
     }
 
     function handleRevSubOpenClose() {
@@ -61,10 +63,9 @@ function ItemCard({ item, handleDeleteItem, handleSetItems, handleDeleteReviewFr
                 return review;
             }
         })
-        const newItem = {...item, reviews: [...item.reviews, updatedReviews]}
-
-        // this needs to change because it is setting items to reviews
-        handleSetItem(newItem)
+        item.reviews = updatedReviews
+        updateItem(item)
+        console.log("in item card", item)
     }
 
     return (
@@ -86,7 +87,7 @@ function ItemCard({ item, handleDeleteItem, handleSetItems, handleDeleteReviewFr
                         displayedReviews={item.reviews}
                         itemId={item.id}
                         onUpdateReview={handleUpdateReview}
-                        handleDeleteReview={handleDeleteReview}
+                        handleDeleteReview={(review) => handleDeleteReview(review)}
                     />
 
                 </Collapse>

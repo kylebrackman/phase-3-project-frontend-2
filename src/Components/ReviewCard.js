@@ -9,6 +9,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 function ReviewCard({ reviewerName, review, rating, onUpdateReview, onDeleteReview }) {
     const [isEditing, setIsEditing] = useState(false)
 
+    function temp(newReview) {
+        console.log(newReview)
+        onUpdateReview(newReview)
+    }
+
     const toggleEdit = () => {
         setIsEditing(!isEditing)
     }
@@ -18,7 +23,6 @@ function ReviewCard({ reviewerName, review, rating, onUpdateReview, onDeleteRevi
             method: "DELETE",
         })
             .then(() => onDeleteReview(id))
-            console.log(id)
     }
 
     return (
@@ -31,7 +35,7 @@ function ReviewCard({ reviewerName, review, rating, onUpdateReview, onDeleteRevi
                 </p>
                 <DeleteOutlineIcon fontSize="small" onClick={() => handleDeleteReview(review.id)}/>
                 <p style={{ fontSize: 12 }}>Edit Review <EditOutlinedIcon fontSize="small" onClick={() => toggleEdit((isEditing) => !isEditing)} /></p>
-                {isEditing ? <EditReview onUpdateReview={onUpdateReview} review={review}/> : null}
+                {isEditing ? <EditReview onUpdateReview={temp} review={review}/> : null}
             </Box>
         </div>
     )

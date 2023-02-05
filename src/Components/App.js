@@ -18,13 +18,15 @@ function App() {
         setItems(data)
       })
   }, [])
+  console.log(items)
+
 
   function handleDeleteItem(id) {
     const updatedItems = items.filter(item => item.id !== id)
     setItems(updatedItems)
   }
 
-  function handleAddItem(newItem){
+  function handleAddItem(newItem) {
     setItems([...items, newItem])
   }
 
@@ -32,20 +34,22 @@ function App() {
     setItems([...items, updatedItems])
   }
 
-// create function "addReviewToItem"
-// same thing for deleting a review, use 'setItems'
-// how do i create a function that adds a review to item, while using setItems?
+  // create function "addReviewToItem"
+  // same thing for deleting a review, use 'setItems'
+  // how do i create a function that adds a review to item, while using setItems?
   function handleSetItem(newItem) {
     const newItemList = items.filter(i => i.id !== newItem.id)
     setItems([...newItemList, newItem])
   }
 
-  function handleDeleteReviewFromItem(item, reviewId) {
-    const newReviews = item.reviews.filter(r => reviewId !== r.id)
-    const newItem = {...item, reviews: newReviews}
-    console.log("ITEM TEST 1", item)
-    handleSetItem(newItem)
-    console.log("ITEM TEST 2", newItem)
+  function updateItem(newItem) {
+    const updatedItems = items.map(item => {
+      if (item.id === newItem.id) {
+        return newItem;
+      }
+      return item;
+    });
+    setItems(updatedItems);
   }
 
 
@@ -53,8 +57,8 @@ function App() {
     <div>
       <NavBar />
       <Routes>
-        <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItem={handleDeleteItem} handleSetItems={handleSetItems} handleDeleteReviewFromItem={handleDeleteReviewFromItem} handleSetItem={handleSetItem}/>} />
-        <Route path="/submissions" element={<Submissions onAddItem={handleAddItem}/>} />
+        <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItem={handleDeleteItem} handleSetItems={handleSetItems}  handleSetItem={handleSetItem} updateItem={updateItem}/>} />
+        <Route path="/submissions" element={<Submissions onAddItem={handleAddItem} />} />
       </Routes>
     </div>
   );

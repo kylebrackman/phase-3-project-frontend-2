@@ -5,12 +5,13 @@ import ReviewCard from "./ReviewCard";
 
 function DisplayedReviewsComp({ displayedReviews, onUpdateReview, handleDeleteReview }) {
 
-    function onDeleteReview(id) {
-        const updatedReviews = displayedReviews.filter(review => review.id !== id)
-        handleDeleteReview(updatedReviews)
-    }
 
+    // function temp (newReview) {
+    //     console.log("displayed reviews", newReview)
+    // }
+    
     const reviewDisplay = displayedReviews.map(r => {
+
         return (
             <ReviewCard
                 key={r.id}
@@ -19,7 +20,7 @@ function DisplayedReviewsComp({ displayedReviews, onUpdateReview, handleDeleteRe
                 rating={r.item_rating}
                 displayedReviews={displayedReviews}
                 onUpdateReview={onUpdateReview}
-                onDeleteReview={onDeleteReview}              
+                onDeleteReview={() => handleDeleteReview(r.id)}              
             />
         )
     })

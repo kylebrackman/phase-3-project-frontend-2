@@ -6,23 +6,22 @@ import { Stack } from "@mui/system";
 
 
 
-function ReviewPage({ items, handleDeleteItem, handleSetItems, handleAddReviewToItem, handleDeleteReviewFromItem, handleSetItem}) {
+function ReviewPage({ items, handleDeleteItem, handleSetItems, handleAddReviewToItem, updateItem, handleSetItem}) {
+
+    // function temp (item) {
+    //     console.log("REVIEW PAGE", item)
+    // }
 
     const itemCards = items.map(item => {
         return (
             <ItemCard
                 item={item}
                 key={item.id}
-                // itemId={item.id}
-                // itemReviews={item.reviews}
-                // itemName={item.item_name}
-                // itemType={item.item_type}
                 handleDeleteItem={handleDeleteItem}
                 handleSetItem={handleSetItem}
-                // does not work, internal server error
                 handleSetItems={handleSetItems}
                 handleAddReviewToItem={handleAddReviewToItem}
-                handleDeleteReviewFromItem={handleDeleteReviewFromItem}
+                updateItem={() => updateItem(item)}
             />
         )
     })
