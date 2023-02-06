@@ -1,16 +1,4 @@
-<Box sx={{ margin: 4, flexGrow: 1 }}>
-         
-          <Grid  container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
-
-            {workspaceCard.map(w => (
-
-                Array.from(Array(1)).map((_, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
-                    <Item>{w}</Item>
-                  </Grid>
-                ))
-
-            ))}
-       
-          </Grid>
-        </Box>
+// 1. Get rid of duplicate state 
+// 2. When I add a review, actually add review to the item
+// 3. When I delete a review, the review should be deleted from the item
+// 4. Full delete functionality for item should be in App

@@ -39,7 +39,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div>``
       <NavBar />
       <Routes>
         <Route path="/reviews" element={<ReviewPage items={items} handleDeleteItem={handleDeleteItem} updateItem={updateItem}/>} />
